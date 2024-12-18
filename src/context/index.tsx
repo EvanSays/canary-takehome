@@ -1,10 +1,27 @@
-import React, { createContext, useReducer } from 'react'
+import React, { createContext, useReducer, Dispatch } from 'react'
 import { ContextProviderProps } from '../types/contextTypes'
 import Reducer from './reducer'
 
-const initialState = {}
+export interface SensorData {
+  timestamp: string
+  latitude: number
+  longitude: number
+  methane: number
+  ethane: number
+}
 
-export const Context = createContext(initialState)
+export interface SensorDataState {
+  sensorData: SensorData[];
+  isStreaming: boolean;
+  currentReading?: SensorData;
+}
+
+const initialState = {
+  sensorData: [],
+  isStreaming: false,
+}
+
+export const Context = createContext<[SensorDataState, Dispatch<any>]>([initialState, () => {}])
 
 export const Store = (props: ContextProviderProps) => {
   const [state, dispatch] = useReducer(Reducer, initialState)

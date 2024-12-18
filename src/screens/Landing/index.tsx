@@ -27,8 +27,6 @@ const LandingScreen = ({navigation}: LandingProps) => {
     </View>
     <ScrollView contentContainerStyle={styles.contentContainer}>
       <NavigationWidget navigation={navigation}/>
-         
-
     </ScrollView> 
   </View>
   )
