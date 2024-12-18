@@ -4,12 +4,13 @@ import AppNav from './AppNav/index'
 import { Context } from '../context';
 import Papa from 'papaparse';
 import { useContext, useEffect } from 'react';
+import { useMockDataStream } from '../hooks/useMockDataStream';
 
 type RootNavProps = {}
 
 const RootNavigator = (props: RootNavProps) => {
     const [state, dispatch] = useContext(Context)
-
+    useMockDataStream()
   useEffect(() => {
     const fetchAndParseCSV = async () => {
       const csvUrl = 'https://gist.githubusercontent.com/EvanSays/42559ad5eb9612528f364743e97736f4/raw/3eab15d7a23bd83272102dc906d52b94ad734eb5/project-canary-data.csv'; // Replace with your CSV URL
@@ -24,6 +25,7 @@ const RootNavigator = (props: RootNavProps) => {
           complete: (results) => {
             // console.log(results.data)
             dispatch({type: 'SET_SENSOR_DATA', payload: results.data})
+            dispatch({type: 'SET_DATA_READY', payload: true})
           },
         });
       } catch (error) {

@@ -3,22 +3,31 @@ import { ContextProviderProps } from '../types/contextTypes'
 import Reducer from './reducer'
 
 export interface SensorData {
-  timestamp: string
-  latitude: number
-  longitude: number
-  methane: number
-  ethane: number
+  index: number
+  Timestamp: string
+  Latitude: string
+  Longitude: string
+  Ch4: string //methane
+  C2H6: string //ethane
 }
 
 export interface SensorDataState {
   sensorData: SensorData[];
   isStreaming: boolean;
   currentReading?: SensorData;
+  isDataReady: boolean;
+  pinHistory: {
+    index: number;
+    latitude: string;
+    longitude: string;
+  }[];
 }
 
 const initialState = {
   sensorData: [],
   isStreaming: false,
+  isDataReady: false,
+  pinHistory: [],
 }
 
 export const Context = createContext<[SensorDataState, Dispatch<any>]>([initialState, () => {}])

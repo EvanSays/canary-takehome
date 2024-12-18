@@ -6,7 +6,7 @@ import {
 import { NavigationProp, ParamListBase, RouteProp } from '@react-navigation/native'
 import { AppStackParamList } from '../../navigation/AppNav'
 import MapView, { Marker } from 'react-native-maps';
-import { Context } from '../../context';
+import { Context, SensorData } from '../../context';
 
 export type MapProps = {
   navigation: NavigationProp<ParamListBase>,
@@ -15,8 +15,12 @@ export type MapProps = {
 
 const MapScreen = ({navigation, route}: MapProps) => {
   const [state, dispatch] = useContext(Context)
-  // console.log({state})
-  console.log(state.sensorData[0])
+
+
+  if (!state.currentReading) {
+    return null
+  }
+
   return (
     <View style={styles.screen}>
       <MapView
@@ -24,24 +28,23 @@ const MapScreen = ({navigation, route}: MapProps) => {
         initialRegion={{
           latitude: 43.0058631897,
           longitude: -84.2338256836,
-          latitudeDelta: 0.4,
-          longitudeDelta: 0.4,
+          latitudeDelta: 0.1,
+          longitudeDelta: 0.1,
         }}
       >
-        {state.sensorData.map((item: any) => {
-          const latitude = parseFloat(item.Latitude);
-          const longitude = parseFloat(item.Longitude);
-          // console.log(latitude, longitude)
-          // console.log(item)
+        {/* <Marker key={index} coordinate={{ latitude: parseFloat(state.currentReading.Latitude), longitude: parseFloat(state.currentReading.Longitude) }} /> */}
+        {state.pinHistory.map((item: any) => {
+          const latitude = parseFloat(item.latitude);
+          const longitude = parseFloat(item.longitude);
+
           return (
-            <Marker key={item.TimeStamp} coordinate={{ latitude: latitude, longitude: longitude }} />
+            <Marker key={item.index} coordinate={{ latitude: latitude, longitude: longitude }} pinColor="#474744"/>
           )
         })}
       </MapView>
     </View>
   )
 }
-
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
