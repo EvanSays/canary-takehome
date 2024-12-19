@@ -4,7 +4,7 @@ import Reducer from './reducer'
 
 export interface SensorData {
   index: number
-  Timestamp: string
+  TimeStamp: string
   Latitude: string
   Longitude: string
   Ch4: string //methane

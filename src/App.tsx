@@ -8,19 +8,20 @@ import {
 import RootNavigator from './navigation';
 import colors from './theme/colors'
 import { Context, Store } from './context';
-import Papa from 'papaparse';
-
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 
 
 const App = () => {
   return (
-    <Store>
-      <SafeAreaView style={styles.wrapper}>
-        <StatusBar backgroundColor={colors.secondary} barStyle={'dark-content'}/>
-        <RootNavigator />
-      </SafeAreaView>
-    </Store>
+    <GestureHandlerRootView>
+      <Store>
+        <SafeAreaView style={styles.wrapper}>
+          <StatusBar backgroundColor={colors.secondary} barStyle={'dark-content'}/>
+          <RootNavigator />
+        </SafeAreaView>
+      </Store>
+    </GestureHandlerRootView>
   );
 };
 
