@@ -18,29 +18,15 @@ Bonus - Can you set up the app to mock as if the data is streaming in live?
 
 Mock data can be found in \src\mock-data
 
-## Tech Requirements
-
-1. Node: ```brew install node```
-1. Yarn: ```npm install yarn -g```
-1. Follow the React Native [doc's](https://reactnative.dev/docs/set-up-your-environment) for development environment set up
-1. Android Studio (for developing on android devices) [download](https://developer.android.com/studio)
-
 
 ## Local Development
 1. Clone the repo.
-1. Run  ```yarn install``` from the root of the directory.
-1. For **Android** run the following commands:
-  ```bash
-    cd android
-    ./gradlew clean
-    cd ..
-  ```
-  *If you receive an error that you have an incompatible JVM version, you will need to install 
-  a different Java Development Kit. React Native recommends using Zulu11. More info on installation can be found under the Java Development Kit section [here](https://reactnative.dev/docs/environment-setup#:~:text=React%20Native%20requires%20at%20least,Oracle%20JDK%2014%20if%20desired.).*
+1. Run  ```npx expo install``` from the root of the directory.
+
 
 
 ### Running the app
 #### Android:
-  - Run ```yarn android``` to start the metro bundler, build the app and boot up the simulator. 
-
+- Run ```npx expo start``` to start the metro bundler, build the app and boot up the simulator. 
+- When metro is running, you can press ```a``` to open the android simulator. Or ```i``` to open the iOS simulator.
 

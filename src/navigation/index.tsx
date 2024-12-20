@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import AppNav from './AppNav/index'
-import { Context } from '../context';
+import { Context, SensorData } from '../context';
 import Papa from 'papaparse';
 import { useContext, useEffect } from 'react';
 
@@ -21,8 +21,7 @@ const RootNavigator = (props: RootNavProps) => {
           header: true,
           skipEmptyLines: true,
           complete: (results) => {
-            // console.log(results.data)
-            dispatch({type: 'SET_SENSOR_DATA', payload: results.data})
+            dispatch({type: 'SET_SENSOR_DATA', payload: results.data as SensorData[]})
             dispatch({type: 'SET_DATA_READY', payload: true})
           },
         });
