@@ -1,5 +1,6 @@
 import React, { createContext, useReducer, Dispatch } from 'react'
 import { ContextProviderProps } from '../types/contextTypes'
+import { Action } from './reducer'
 import Reducer from './reducer'
 
 export interface SensorData {
@@ -13,8 +14,8 @@ export interface SensorData {
 
 export interface SensorDataState {
   sensorData: SensorData[];
-  isStreaming: boolean;
-  currentReading?: SensorData;
+  isStreamingReady: boolean;
+  currentReading?: SensorData | null;
   isDataReady: boolean;
   pinHistory: {
     index: number;
@@ -28,15 +29,18 @@ export interface SensorDataState {
 
 const initialState = {
   sensorData: [],
-  isStreaming: false,
+  isStreamingReady: false,
   isDataReady: false,
   pinHistory: [],
 }
 
-export const Context = createContext<[SensorDataState, Dispatch<any>]>([initialState, () => {}])
+export const Context = createContext<[SensorDataState, Dispatch<Action>]>([initialState, () => {}])
 
 export const Store = (props: ContextProviderProps) => {
-  const [state, dispatch] = useReducer(Reducer, initialState)
+  const [state, dispatch] = useReducer<React.Reducer<SensorDataState, Action>>(
+    Reducer, 
+    initialState
+  )
 
   return (
     <Context.Provider value={[state, dispatch]}>{props.children}</Context.Provider>

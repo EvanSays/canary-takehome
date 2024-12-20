@@ -7,6 +7,7 @@ export const useMockDataStream = () => {
 
     const startReading = () => {
         if (state.isDataReady) {
+            dispatch({type: 'SET_STREAMING_READY', payload: true})
             let index = 0
             const interval = setInterval(() => {
                 if (index >= state.sensorData.length) {

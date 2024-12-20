@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { 
   StyleSheet,
   Text,
@@ -10,6 +10,7 @@ import { NavigationProp, ParamListBase } from "@react-navigation/native"
 import { NavNames } from "../../constants/navigation"
 import ChartIcon from "../../resources/icons/Graph"
 import DashboardButton from "../DashboardButton"
+import { Context } from "../../context";
 
 
  type NavigationWidgetProps = {
@@ -17,6 +18,7 @@ import DashboardButton from "../DashboardButton"
  }
 
 const NavigationWidget = ({navigation}: NavigationWidgetProps) => {
+  const [state, _] = useContext(Context)
 
   const handleMapPress = () => {
     navigation.navigate(NavNames.maps)
@@ -32,6 +34,7 @@ const NavigationWidget = ({navigation}: NavigationWidgetProps) => {
         <DashboardButton
           onPress={handleMapPress}
           text='Map'
+          disabled={!state.isStreamingReady}
         />
         <DashboardButton
           onPress={handleVisualizationPress}

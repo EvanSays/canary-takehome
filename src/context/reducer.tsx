@@ -1,6 +1,6 @@
 import type { SensorDataState, SensorData } from './index'
 import { calcDelta } from '../utils'
-type Action = {
+export type Action = {
   type: 'SET_SENSOR_DATA';
   payload: SensorData[];
 } | {
@@ -11,6 +11,9 @@ type Action = {
   payload: boolean;
 } | {
   type: 'RESET_CURRENT_READING';
+} | {
+  type: 'SET_STREAMING_READY';
+  payload: boolean;
 }
 
 const Reducer = (state: SensorDataState, action: Action) => {
@@ -29,7 +32,6 @@ const Reducer = (state: SensorDataState, action: Action) => {
         methane: Number(action.payload.Ch4),
         ethane: Number(action.payload.C2H6),
       }]
-      // console.log(pinHistory[pinHistory.length - 1].delta)
       return {
         ...state,
         currentReading: action.payload,
@@ -39,12 +41,20 @@ const Reducer = (state: SensorDataState, action: Action) => {
       return {
         ...state,
         currentReading: null,
+        isStreamingReady: false,
+        pinHistory: [],
       }
 
     case 'SET_DATA_READY':
       return {
         ...state,
         isDataReady: action.payload,
+      }
+
+    case 'SET_STREAMING_READY':
+      return {
+        ...state,
+        isStreamingReady: action.payload,
       }
     default:
       return state

@@ -1,7 +1,8 @@
 import React, {useContext, useMemo} from 'react'
 import {
   StyleSheet,
-  View
+  View,
+  Image
 } from 'react-native'
 import { NavigationProp, ParamListBase, RouteProp } from '@react-navigation/native'
 import { AppStackParamList } from '../../navigation/AppNav'
@@ -48,6 +49,12 @@ const styles = StyleSheet.create({
   },
   map: {
     flex: 1,
+  },
+  marker: {
+    width: 50,
+    height: 50,
+    padding: 5,
+    resizeMode: 'contain',
   },
 });
 

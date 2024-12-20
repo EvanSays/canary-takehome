@@ -7,15 +7,16 @@ import {
 import colors from '../../theme/colors'
 
 interface IDashboardButton {
-  icon: ReactNode;
+  icon?: ReactNode;
   onPress: () => void;
   text: string;
+  disabled?: boolean;
 }
 
-export default ({icon, onPress, text}: IDashboardButton) => {
+export default ({icon, onPress, text, disabled = false}: IDashboardButton) => {
 
   return (
-    <Pressable onPress={onPress} style={styles.button}>
+    <Pressable onPress={onPress} style={[styles.button, disabled && styles.disabled]} disabled={disabled}>
       {icon}
       <Text style={styles.buttonText}>{text}</Text>
     </Pressable>
@@ -42,5 +43,7 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     paddingTop: 4,
   },
-
+  disabled: {
+    backgroundColor: colors.shadowColor,
+  },
 })
