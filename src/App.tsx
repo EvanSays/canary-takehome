@@ -9,10 +9,17 @@ import RootNavigator from './navigation';
 import colors from './theme/colors'
 import { Context, Store } from './context';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import * as Font from 'expo-font';
 
 
 
 const App = () => {
+  useEffect(() => {
+    Font.loadAsync({
+      'Inter-Medium': require('../assets/fonts/inter-medium.ttf'),
+    });
+  }, []);
+
   return (
     <GestureHandlerRootView>
       <Store>

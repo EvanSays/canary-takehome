@@ -36,6 +36,7 @@ const ChartsNav = () => {
           shadowRadius: 6
         },
         tabBarPressColor: colors.secondary,
+        swipeEnabled: false,
       }}
     >
       <Tab.Screen

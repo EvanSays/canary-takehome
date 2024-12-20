@@ -7,6 +7,7 @@ import { NavigationProp, ParamListBase, RouteProp } from '@react-navigation/nati
 import { AppStackParamList } from '../../navigation/AppNav'
 import MapView, { Marker } from 'react-native-maps';
 import { Context, SensorData } from '../../context';
+import { getDeltaColor } from '../../utils';
 
 export type MapProps = {
   navigation: NavigationProp<ParamListBase>,
@@ -15,7 +16,6 @@ export type MapProps = {
 
 const MapScreen = ({navigation, route}: MapProps) => {
   const [state, dispatch] = useContext(Context)
-
 
   if (!state.currentReading) {
     return null
@@ -32,13 +32,10 @@ const MapScreen = ({navigation, route}: MapProps) => {
           longitudeDelta: 0.1,
         }}
       >
-        {/* <Marker key={index} coordinate={{ latitude: parseFloat(state.currentReading.Latitude), longitude: parseFloat(state.currentReading.Longitude) }} /> */}
         {state.pinHistory.map((item: any) => {
-          const latitude = parseFloat(item.latitude);
-          const longitude = parseFloat(item.longitude);
-
+          const {latitude, longitude, delta, methane, ethane} = item
           return (
-            <Marker key={item.index} coordinate={{ latitude: latitude, longitude: longitude }} pinColor="#474744"/>
+            <Marker key={item.index} coordinate={{ latitude, longitude }} pinColor={getDeltaColor(delta)} title={`Ch4 & C2H6 Levels:`} description={`Ch4: ${methane.toFixed(4)} ppm, C2H6: ${ethane.toFixed(4)} ppm, Delta: ${delta.toFixed(4)}`}/>
           )
         })}
       </MapView>

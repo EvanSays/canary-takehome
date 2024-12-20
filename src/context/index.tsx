@@ -18,8 +18,11 @@ export interface SensorDataState {
   isDataReady: boolean;
   pinHistory: {
     index: number;
-    latitude: string;
-    longitude: string;
+    latitude: number;
+    longitude: number;
+    delta: number;
+    methane: number;
+    ethane: number;
   }[];
 }
 
